@@ -1,0 +1,74 @@
+﻿@model MVC_ArsonProject.Models.ViewMemberLogin
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>首頁</li>
+        <li>會員專區</li>
+        <li><a href="#"> 會員登入</a></li>
+    </ul>
+}
+
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h2 class="widget-title"><i class="fa fa-folder-open-o">&nbsp;</i>會員專區</h2>
+                        <ul class="arrow nav nav-tabs nav-stacked">
+                            <li class="active"><a href="#">會員登入</a></li>
+                        </ul>
+                    </div>
+                    <!-- Categories end -->
+                </div>
+                <!-- Sidebar end -->
+            </div>
+            <!-- Sidebar Col end -->
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <h2 class="page-title">會員登入</h2>
+                <hr class="botmargin-min">
+                <span class="text-danger">@ViewBag.ErrorMessage</span>
+                <!-- 內容開始 -->
+                @using (Html.BeginForm("Login", "Members", FormMethod.Post, new { @class = "form-horizontal comments-form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <h3 class="title-normal">請輸入您的帳號及密碼</h3>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Account, "帳　號：", htmlAttributes: new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入帳號" } })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, "密　碼：", htmlAttributes: new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入密碼", type="password" } })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button class="btn btn-primary solid blank" type="submit">登 入</button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="text-left">
+                        <a href="@Url.Action("Register")">尚未註冊</a>
+                    </div>
+                }
+
+            </div>
+            <!-- Content Col end -->
+            <!-- 內容結束 -->
+        </div>
+        <!-- Main row end -->
+    </div>
+    <!-- Conatiner end -->
+</section>
+<!-- Main container end -->

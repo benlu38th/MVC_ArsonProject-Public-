@@ -1,0 +1,105 @@
+﻿@model MvcPaging.IPagedList<MVC_ArsonProject.Models.ViewDownload>
+
+
+@{
+    List<string> errorFiles = ViewBag.ErrorFiles;
+}
+@{
+    ViewBag.Title = "討論區";
+}
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>首頁</li>
+        <li>會員專區</li>
+        <li><a href="#"> @ViewBag.Title</a></li>
+    </ul>
+}
+
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h2 class="widget-title"><i class="fa fa-folder-open-o">&nbsp;</i>會員專區</h2>
+                        <ul class="arrow nav nav-tabs nav-stacked">
+                            <li class="active"><a href="#">討論區</a></li>
+                            <li><a href="@Url.Action("Edit","Members")">修改個人資料</a></li>
+                            <li><a href="@Url.Action("LogOff","Members")">登出</a></li>
+                        </ul>
+                    </div>
+                    <!-- Categories end -->
+                </div>
+                <!-- Sidebar end -->
+            </div>
+            <!-- Sidebar Col end -->
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <h2 class="page-title">@ViewBag.Title</h2>
+                <hr class="botmargin-min">
+                <!-- 內容開始 -->
+
+                <style>
+                    .respon {
+                        margin: 20px auto;
+                        display: inline-block;
+                        padding: 3px 8px;
+                        background: #b2b2b2;
+                        color: white;
+                        border-radius: 2px;
+                    }
+                </style>
+                <a class="respon" href="@Url.Action("Create")">張貼文章</a>
+                <table class="table table-striped career-table download-table">
+
+                    <thead>
+                        <tr>
+
+                            <th><span class="text-left">標題</span></th>
+                            <th>發表人</th>
+                            <th>最新回覆人</th>
+                            <th>回覆數</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><span class="text-left"><a href="@Url.Action("Details", "Download", new { id = item.Post.Id })">@item.Post.Title</a></span></td>
+                                <td>@item.Post.MyMember.Name<br />@item.Post.InitDate.ToString("D")</td>
+                                @if (item.LatestMessage != null)
+                                {
+                                    <td>@item.LatestMessage.MyMember.Name<br />@item.LatestMessage.InitDate.ToString("D")</td>
+                                }
+                                else
+                                {
+                                    <td>NA</td>
+                                }
+                                <td>@item.MessageNums</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!--分頁開始-->
+                <div class="pager">
+                    <div class="pages">
+                        <div class="pagination">
+                            @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+                        </div>
+                    </div>
+                </div>
+                <!--分頁結束-->
+
+            </div>
+            <!-- Content Col end -->
+            <!-- 內容結束 -->
+        </div>
+        <!-- Main row end -->
+    </div>
+    <!-- Conatiner end -->
+</section>
+<!-- Main container end -->
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

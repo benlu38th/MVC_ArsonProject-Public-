@@ -1,0 +1,85 @@
+﻿@model MVC_ArsonProject.Models.ViewDownloadCreate
+
+@{
+    List<string> errorFiles = ViewBag.ErrorFiles;
+}
+@{
+    ViewBag.Title = "討論區";
+}
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>首頁</li>
+        <li>會員專區</li>
+        <li><a href="#"> @ViewBag.Title</a></li>
+    </ul>
+}
+
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h2 class="widget-title"><i class="fa fa-folder-open-o">&nbsp;</i>會員專區</h2>
+                        <ul class="arrow nav nav-tabs nav-stacked">
+                            <li class="active"><a href="#">討論區</a></li>
+                            <li><a href="@Url.Action("Edit","Members")">修改個人資料</a></li>
+                            <li><a href="@Url.Action("LogOff", "Members")">登出</a></li>
+                        </ul>
+                    </div>
+                    <!-- Categories end -->
+                </div>
+                <!-- Sidebar end -->
+            </div>
+            <!-- Sidebar Col end -->
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <h2 class="page-title">@ViewBag.Title</h2>
+                <hr class="botmargin-min">
+                <!-- 內容開始 -->
+
+                @using (Html.BeginForm("Create", "Download", FormMethod.Post, new { @class = "form-horizontal comments-form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Title, "主  題：", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "請填入主題" } })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, "內  文：", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <br />
+                        <br />
+                        @Html.TextAreaFor(model => model.Description, new { @class = "ckeditor" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button class="btn btn-primary solid blank" type="submit">發 表</button>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <!-- Content Col end -->
+            <!-- 內容結束 -->
+        </div>
+        <!-- Main row end -->
+    </div>
+    <!-- Conatiner end -->
+</section>
+<!-- Main container end -->
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var editor = CKEDITOR.replace('Description', { height: '500px'});
+        CKFinder.setupCKEditor(editor);
+    </script>
+}
+

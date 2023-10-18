@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MVC_ArsonProject.Models.Knowledge>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>知識庫管理</h2>
+
+<a href="@Url.Action("Create")" class="btn app-btn-primary mb-2">新增</a>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DownloadFileUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InitDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            <a href="@item.DownloadFileUrl" download >下載</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InitDate)
+        </td>
+        <td>
+            @Html.ActionLink("編輯", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("刪除", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

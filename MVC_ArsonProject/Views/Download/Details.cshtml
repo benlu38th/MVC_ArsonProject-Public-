@@ -1,0 +1,175 @@
+﻿@model MvcPaging.IPagedList<MVC_ArsonProject.Models.Message>
+
+@{
+    ViewBag.Title = "討論區";
+}
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>首頁</li>
+        <li>會員專區</li>
+        <li><a href="#"> @ViewBag.Title</a></li>
+    </ul>
+}
+
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h2 class="widget-title"><i class="fa fa-folder-open-o">&nbsp;</i>會員專區</h2>
+                        <ul class="arrow nav nav-tabs nav-stacked">
+                            <li class="active"><a href="#">討論區</a></li>
+                            <li><a href="@Url.Action("Edit","Members")">修改個人資料</a></li>
+                            <li><a href="@Url.Action("LogOff", "Members")">登出</a></li>
+                        </ul>
+                    </div>
+                    <!-- Categories end -->
+                </div>
+                <!-- Sidebar end -->
+            </div>
+            <!-- Sidebar Col end -->
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <h2 class="page-title">@ViewBag.Title</h2>
+                <hr class="botmargin-min">
+                <!-- 內容開始 -->
+
+                <style>
+                    .entry-header {
+                        background: #3c73b0;
+                        color: white;
+                        padding: 10px 30px;
+                    }
+
+                        .entry-header .entry-title {
+                            color: white;
+                        }
+
+                    .entry-title {
+                    }
+
+                    .post-meta-date {
+                    }
+
+                    .post-content {
+                        border: whitesmoke 1px solid;
+                        margin-bottom: 20px;
+                        box-shadow: rgba(210,210,210,.1) 2px 2px 20px;
+                    }
+
+                    .entry-content {
+                    }
+
+                    .post {
+                        border: whitesmoke 1px solid;
+                        padding: 0;
+                    }
+
+                    .postInfo {
+                        padding: 10px 20px;
+                        background: #eee;
+                        text-align: right;
+                    }
+
+                    .respon {
+                        margin: 20px auto;
+                        display: inline-block;
+                        padding: 3px 8px;
+                        background: #b2b2b2;
+                        color: white;
+                        border-radius: 2px;
+                    }
+
+                    .post-body {
+                        background: #FCFCFC;
+                        padding: 30px;
+                        box-shadow: rgba(210,210,210,.1) 2px 2px 20px;
+                    }
+
+                    .clear {
+                        clear: both;
+                    }
+
+                    .postMan {
+                        font-size: 16px;
+                    }
+                </style>
+                @if (@ViewBag.CurrentPageIndex == 1 || @ViewBag.CurrentPageIndex == null)
+                {
+                    <div class="post-content">
+                        <div class="entry-header">
+                            <h2 class="entry-title">
+                                @ViewBag.Post.Title
+                            </h2>
+                            <span class="postMan"> 發表人:@ViewBag.Post.MyMember.Name</span>
+
+                        </div><!-- header end -->
+                        <div class="postInfo">
+                            <span class="post-meta-date"><i class="fa fa fa-clock-o">@ViewBag.Post.InitDate.ToString("d")</i></span>
+
+
+                        </div>
+                        <div class="post-body">
+                            <div class="entry-content topmargin-min">
+                                <p>@Html.Raw(ViewBag.Post.Description)</p>
+                            </div>
+                            <div class="tags-area clearfix">
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+                <a class="respon" href="@Url.Action("CreateRe", "Download", new {id = ViewBag.Post.Id})">回應文章</a>
+                <div class="clear"></div>
+
+                @foreach (var item in Model)
+                {
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="entry-header">
+                                    <div class="post-media post-image postMan">
+                                        回應:@item.MyMember.Name
+                                    </div>
+
+                                </div>
+                                <div class="postInfo">
+                                    <span class="post-meta-date"><i class="fa fa fa-clock-o"></i>@item.InitDate.ToString("d")</span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="post-body">
+                                    @Html.Raw(item.Description)
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!--分頁開始-->
+                <div class="pager">
+                    <div class="pages">
+                        <div class="pagination">
+                            @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+                        </div>
+                        <div class="page_boxR"> 資料筆數：@ViewBag.count</div>
+                    </div>
+                </div>
+                <!--分頁結束-->
+
+                <div class="post-footer  pull-left">
+                    <a onclick="history.back()" onKeyPress="history.back()" class="btn btn-primary">返回列表</a>
+                </div>
+
+
+                <!-- 內容結束 -->
+            </div>
+            <!-- Content Col end -->
+        </div>
+        <!-- Main row end -->
+    </div>
+    <!-- Conatiner end -->
+</section>
+<!-- Main container end -->

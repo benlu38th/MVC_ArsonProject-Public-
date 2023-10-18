@@ -1,0 +1,80 @@
+﻿@model MvcPaging.IPagedList<MVC_ArsonProject.Models.Knowledge>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    ViewBag.Title = "知識庫下載";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>首頁</li>
+        <li>知識庫</li>
+        <li><a href="#">@ViewBag.Title</a></li>
+    </ul>
+}
+
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h2 class="widget-title"><i class="fa fa-folder-open-o">&nbsp;</i>知識庫</h2>
+                        <ul class="arrow nav nav-tabs nav-stacked">
+                            <li class="active"><a href="#">知識庫下載</a></li>
+                    </div><!-- Categories end -->
+
+                </div><!-- Sidebar end -->
+            </div><!-- Sidebar Col end -->
+
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+                <h2 class="page-title">@ViewBag.Title</h2>
+                <hr class="botmargin-min">
+
+                <!-- 內容開始 -->
+
+                <table class="table table-striped career-table download-table">
+
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th><span class="text-left">標題</span></th>
+                            <th>檔案</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.InitDate.ToString("yyyy-MM-dd")</td>
+                                <td><span class="text-left">@item.Title</span></td>
+                                <td><a href="@item.DownloadFileUrl" download class="btn btn-primary"><i class="fa fa-download"></i>下載</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!--分頁開始-->
+                <div class="pager">
+                    <div class="pages">
+                        <div class="pagination">
+                            @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+                        </div>
+                        <div class="page_boxR"> 資料筆數：@ViewBag.count  　</div>
+                    </div>
+                </div>
+                <!--分頁結束-->
+
+                <!-- 內容結束 -->
+            </div><!-- Content Col end -->
+
+        </div><!-- Main row end -->
+
+    </div><!-- Conatiner end -->
+</section><!-- Main container end -->

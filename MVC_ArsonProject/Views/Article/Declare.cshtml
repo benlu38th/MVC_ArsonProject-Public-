@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "智慧財產權宣告";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>首頁</li>
+        <li><a href="#">財產權宣告</a></li>
+    </ul>
+}
+
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h2 class="widget-title"><i class="fa fa-folder-open-o">&nbsp;</i>財產權宣告</h2>
+                    </div><!-- Categories end -->
+
+                </div><!-- Sidebar end -->
+            </div><!-- Sidebar Col end -->
+
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+                <h2 class="page-title">@ViewBag.Title</h2>
+                <hr class="botmargin-min">
+
+                <!-- 內容開始 -->
+
+                @Html.Raw(Model.Description)
+
+                <!-- 內容結束 -->
+            </div><!-- Content Col end -->
+
+        </div><!-- Main row end -->
+
+    </div><!-- Conatiner end -->
+</section><!-- Main container end -->

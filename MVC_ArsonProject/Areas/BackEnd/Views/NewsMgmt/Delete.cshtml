@@ -1,0 +1,62 @@
+﻿@model MVC_ArsonProject.Models.News
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>最新消息管理</h2>
+
+<h3>你確定要刪除這個嗎?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InitDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InitDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sumary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sumary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoverUrl)
+        </dt>
+
+        <dd>
+            <img src="@Model.CoverUrl"></img>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Description)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="確認刪除" class="btn app-btn-danger" />
+            <a href="@Url.Action("Index")" class="btn app-btn-primary">返回</a>
+        </div>
+    }
+</div>

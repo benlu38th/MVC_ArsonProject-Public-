@@ -1,0 +1,79 @@
+﻿
+@model MvcPaging.IPagedList<MVC_ArsonProject.Models.News>
+@{
+    ViewBag.Title = "最新消息";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>首頁</li>
+        <li>訊息發布</li>
+        <li><a href="#">@ViewBag.Title</a></li>
+    </ul>
+}
+
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h2 class="widget-title"><i class="fa fa-folder-open-o">&nbsp;</i>訊息發布</h2>
+                        <ul class="arrow nav nav-tabs nav-stacked">
+                            <li class="active"><a href="#">最新消息</a></li>
+                        </ul>
+                    </div><!-- Categories end -->
+
+                </div><!-- Sidebar end -->
+            </div><!-- Sidebar Col end -->
+
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <!-- 內容開始 -->
+                <h2 class="page-title">最新消息</h2>
+                <hr class="botmargin-min">
+                @foreach (var item in Model)
+                {
+                    <div class="post">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12 col-xs-12">
+                                <div class="post-media post-image">
+                                    <a href="/News/Details/@item.Id"><img alt="img" src="@item.CoverUrl" class="img-responsive"></a>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-sm-12 col-xs-12">
+                                <div class="post-body">
+                                    <div class="entry-header">
+                                        <span class="post-meta-date"><i class="fa fa fa-clock-o"></i> @item.InitDate.ToString("M/d/yyyy")</span>
+                                        <h3 class="entry-title">
+                                            <a href="/News/Details/@item.Id">@item.Title</a>
+                                        </h3>
+                                        <p>@item.Sumary...</p>
+                                    </div>
+                                    <!-- header end -->
+                                    <div class="post-footer">
+                                        <a href="/News/Details/@item.Id" class="btn btn-primary">more</a>
+                                    </div>
+                                </div>
+                                <!-- post-body end -->
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!--分頁開始-->
+                <div class="pager">
+                    <div class="pages">
+                        <div class="pagination">
+                            @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+                        </div>
+                        @*<div class="page_boxR"> 資料筆數：@ViewBag.count  　</div>*@
+                    </div>
+                </div>
+                <!--分頁結束-->
+
+            </div><!-- Main row end -->
+
+        </div><!-- Conatiner end -->
+</section><!-- Main container end -->

@@ -1,0 +1,68 @@
+﻿@model MVC_ArsonProject.Models.News
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>最新消息管理</h2>
+
+@using (Html.BeginForm("Create", "NewsMgmt", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>新增</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sumary, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Sumary, new { @class = "form-control", style = " height:100px" })
+            @Html.ValidationMessageFor(model => model.Sumary, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Description, new { @class = "ckeditor, form-control" })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CoverUrl, "上傳封面", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="CoverFile" accept="image/*" multiple>
+        </div>
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.InitDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.InitDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+            @Html.ValidationMessageFor(model => model.InitDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br />
+    <input type="submit" value=" 確認送出" class="btn app-btn-primary" />
+    <a href="@Url.Action("Index")" class="btn app-btn-primary">返回</a>
+</div>
+}
+
+@section scripts{
+    <script>
+        var editor = CKEDITOR.replace('Description');
+        CKFinder.setupCKEditor(editor);
+    </script>
+}

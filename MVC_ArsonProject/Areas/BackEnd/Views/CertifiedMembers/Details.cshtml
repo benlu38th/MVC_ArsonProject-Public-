@@ -1,0 +1,74 @@
+﻿@model MVC_ArsonProject.Models.CertifiedMember
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>配證會員管理</h2>
+
+<div>
+    <h4>細節</h4>
+    <p>
+        <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn app-btn-primary">編輯</a>
+        <a href="@Url.Action("Index")" class="btn app-btn-primary">返回</a>
+    </p>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PictureUrl)
+        </dt>
+
+        <dd>
+            <img src="@Model.PictureUrl"></img>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Counrty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Counrty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InitDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InitDate)
+        </dd>
+
+    </dl>
+</div>

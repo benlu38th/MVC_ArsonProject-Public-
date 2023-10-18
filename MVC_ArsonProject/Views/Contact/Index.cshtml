@@ -1,0 +1,126 @@
+﻿@model MVC_ArsonProject.Models.ContactUser
+@using System.Configuration;
+@{
+    string _googlesitekey = ConfigurationManager.AppSettings["RecaptchaSiteKey"];
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>首頁</li>
+        <li>聯絡我們</li>
+        <li><a href="#"> 聯絡我們</a></li>
+    </ul>
+}
+
+@section headerscripts{
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+}
+
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h2 class="widget-title"><i class="fa fa-folder-open-o">&nbsp;</i>聯絡我們</h2>
+                        <ul class="arrow nav nav-tabs nav-stacked">
+                            <li class="active"><a href="#">聯絡我們</a></li>
+                        </ul>
+                    </div>
+                    <!-- Categories end -->
+                </div>
+                <!-- Sidebar end -->
+            </div>
+            <!-- Sidebar Col end -->
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <h2 class="page-title">聯絡我們 </h2>
+                <hr class="botmargin-min">
+                <!-- 內容開始 -->
+                @using (Html.BeginForm("Index", "Contact", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, "姓　名：", htmlAttributes: new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-7">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入姓名" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger alertred" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GenderType, "性　別：", htmlAttributes: new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-7">
+                            <label class="checkbox-inline checkbox01">
+                                @Html.RadioButtonFor(model => model.GenderType, MVC_ArsonProject.Models.EnumList.Gender.男, new { id = "男", @class = "radiostyle01", @checked = true })
+                                <label for="男">男</label>
+                            </label>
+                            <label class="checkbox-inline checkbox01">
+                                @Html.RadioButtonFor(model => model.GenderType, MVC_ArsonProject.Models.EnumList.Gender.女, new { id = "女", @class = "radiostyle01" })
+                                <label for="女">女</label>
+                            </label>
+                            @Html.ValidationMessageFor(model => model.GenderType, "", new { @class = "text-danger alertred" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Telephone, "聯絡電話：", htmlAttributes: new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-7">
+                            @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入聯絡電話" } })
+                            @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger alertred" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, "E-mail：", htmlAttributes: new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-7">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入Email" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger alertred" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Title, "詢問標題：", htmlAttributes: new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-7">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入標題" } })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger alertred" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, "詢問內容：", htmlAttributes: new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "form-control form-control-message", placeholder = "請輸入內容", style = "height: 150px" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger alertred" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">驗證：</label>
+
+                        <div class="col-sm-7">
+                            <div class="g-recaptcha" data-sitekey=@_googlesitekey style="height:100px"></div>
+                            @if (ViewBag.Message != null)
+                            {
+                            <label class="text-danger alertred">@ViewBag.Message</label>
+                            }
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button class="btn btn-primary solid blank" type="submit">送 出</button>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <!-- Content Col end -->
+            <!-- 內容結束 -->
+        </div>
+        <!-- Main row end -->
+    </div>
+    <!-- Conatiner end -->
+</section>

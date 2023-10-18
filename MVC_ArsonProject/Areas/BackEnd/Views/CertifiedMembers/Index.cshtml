@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MVC_ArsonProject.Models.CertifiedMember>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>配證會員管理</h2>
+
+<a href="@Url.Action("Create")" class="btn app-btn-primary mb-2">新增</a>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PictureUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img width="200px" src="@item.PictureUrl" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.ActionLink("編輯", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("細節", "Details", new { id = item.Id }) |
+            @Html.ActionLink("刪除", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

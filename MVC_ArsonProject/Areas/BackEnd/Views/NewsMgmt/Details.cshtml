@@ -1,0 +1,59 @@
+﻿@model MVC_ArsonProject.Models.News
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>最新消息管理</h2>
+
+<div>
+    <h4>細節</h4>
+    <p>
+        <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn app-btn-primary">編輯</a>
+        <a href="@Url.Action("Index")" class="btn app-btn-primary">返回</a>
+    </p>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InitDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InitDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sumary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sumary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoverUrl)
+        </dt>
+
+        <dd>
+            <img src="@Model.CoverUrl"></img>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Description)
+        </dd>
+
+    </dl>
+</div>
+

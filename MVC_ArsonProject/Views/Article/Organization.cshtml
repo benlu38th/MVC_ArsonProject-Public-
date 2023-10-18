@@ -1,0 +1,51 @@
+﻿@model MVC_ArsonProject.Models.Article
+
+@{
+    ViewBag.Title = "組織架構";
+}
+
+@section Breadcrumb {
+    <ul class="breadcrumb">
+        <li>首頁</li>
+        <li>關於我們</li>
+        <li><a href="#">@ViewBag.Title</a></li>
+    </ul>
+}
+
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h2 class="widget-title"><i class="fa fa-folder-open-o">&nbsp;</i>關於我們</h2>
+                        <ul class="arrow nav nav-tabs nav-stacked">
+                            <li><a href="~/Article/About">關於我們</a></li>
+                            <li class="active"><a href="#">組織架構</a></li>
+                            <li><a href="~/Article/History">沿革</a></li>
+                            <li><a href="~/Article/Member">配證會員</a></li>
+                            <li><a href="~/Expert">專家介紹</a></li>
+                        </ul>
+                    </div><!-- Categories end -->
+
+                </div><!-- Sidebar end -->
+            </div><!-- Sidebar Col end -->
+
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+                <h2 class="page-title">組織架構</h2>
+                <hr class="botmargin-min">
+
+                <!-- 內容開始 -->
+
+                @Html.Raw(Model.Description)
+
+                <!-- 內容結束 -->
+            </div><!-- Content Col end -->
+
+        </div><!-- Main row end -->
+
+    </div><!-- Conatiner end -->
+</section><!-- Main container end -->

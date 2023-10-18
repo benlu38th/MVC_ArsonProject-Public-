@@ -1,0 +1,80 @@
+﻿@model MVC_ArsonProject.Models.CertifiedMember
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>配證會員管理</h2>
+
+<h3>你確定要刪除這個嗎?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PictureUrl)
+        </dt>
+
+        <dd>
+            <img width="200px" src="@Model.PictureUrl"></img>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Counrty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Counrty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InitDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InitDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="確認刪除" class="btn app-btn-danger" />
+            <a href="@Url.Action("Index")" class="btn app-btn-primary">返回</a>
+        </div>
+    }
+</div>
